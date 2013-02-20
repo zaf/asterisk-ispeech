@@ -33,6 +33,7 @@
 use warnings;
 use strict;
 use Digest::MD5 qw(md5_hex);
+use File::Path qw(mkpath);
 use CGI::Util qw(escape unescape);
 use LWP::UserAgent;
 use LWP::ConnCache;
@@ -77,7 +78,7 @@ my $url;
 my $frequency = "8000";
 my $format    = "wav";
 my $intkey    = "";
-my $maxlen    = "2048";
+my $maxlen    = "4096";
 my $host      = "api.ispeech.org/api/rest";
 
 # Store AGI input #
@@ -122,15 +123,19 @@ if (length($AGI{arg_4})) {
 }
 
 # Check cache path size: dir length + md5 + file extension #
-if ($usecache && ((length($cachedir) + 32 + 6) > $maxlen)) {
+if ($usecache && ((length($cachedir) + 32 + 6) < $maxlen)) {
+	mkpath("$cachedir") unless (-d "$cachedir");
+} else {
 	warn "$name Cache path size exceeds limit. Disabling cache.\n";
 	$usecache = 0;
 }
 
 # Answer channel if not already answered #
+warn "$name Checking channel status.\n" if ($debug);
 print "CHANNEL STATUS\n";
 @result = checkresponse();
 if ($result[0] == 4) {
+	warn "$name Answering channel.\n" if ($debug);
 	print "ANSWER\n";
 	checkresponse();
 }
