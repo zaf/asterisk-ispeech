@@ -75,10 +75,11 @@ my $filename;
 my @result;
 my $name;
 my $url;
-my $frequency = "8000";
+my $frequency = 8000;
 my $format    = "wav";
 my $intkey    = "";
-my $maxlen    = "4096";
+my $timeout   = 10;
+my $maxlen    = 4096;
 my $host      = "api.ispeech.org/api/rest";
 
 # Store AGI input #
@@ -151,7 +152,7 @@ if ($use_ssl) {
 $ua->agent("Asterisk iSpeech TTS module");
 $ua->env_proxy;
 $ua->conn_cache(LWP::ConnCache->new());
-$ua->timeout(5);
+$ua->timeout($timeout);
 
 foreach my $line (@text) {
 	$line =~ s/^\s+|\s+$//g;
