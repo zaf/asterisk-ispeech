@@ -13,7 +13,11 @@ Perl          The Perl Programming Language
 perl-libwww   The World-Wide Web library for Perl
 IO-Socket-SSL Perl module that implements an interface to SSL sockets.
 
-Internet access in order to contact google and get the speech data.
+An API key from iSpeech: To obtain an API key please visit:
+http://www.ispeech.org/developers and register for a developer account.
+
+Internet access in order to contact iSpeech and get the speech and text data.
+
 ** Optional**
 speex         patent-free audio compression format designed for speech.
 
@@ -127,4 +131,4 @@ License v2. See LICENSE for details.
 --------
 Homepage
 --------
-https://github.com/zaf
+http://zaf.github.io/asterisk-ispeech/
