@@ -1,162 +1,230 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Asterisk-ispeech by zaf</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Asterisk-ispeech</h1>
-        <p>AGI scripts for TTS and ASR using iSpeech service</p>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <p class="view"><a href="https://github.com/zaf/asterisk-ispeech">View the Project on GitHub <small>zaf/asterisk-ispeech</small></a></p>
+  <title>iPSeech plugins for Asterisk PBX</title>
+  <meta name="description" content=
+  "Asterisk plugins for the iSpeech TTS and ASR services." />
+  <style type="text/css">
+/*<![CDATA[*/
+    body {
+      margin-top: 1.0em;
+      background-color: #f6772f;
+      font-family: Helvetica, Arial, FreeSans, san-serif;
+      color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 750px;
+    }
+    h1 { font-size: 3.5em; color: #ffffff; margin-bottom: 3px; }
+    h1 .small { font-size: 0.4em; }
+    h1 a { text-decoration: none }
+    h2 { font-size: 1.5em; color: #ffffff; }
+    h3 { text-align: center; color: #ffffff; }
+    a { color: #ffffff; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+    pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+  /*]]>*/
+  </style>
+  <script type="text/javascript">
+//<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-10482811-5']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+  //]]>
+  </script>
+  <style type="text/css">
+/*<![CDATA[*/
+  img.c1 {position: absolute; top: 0; right: 0; border: 0;}
+  /*]]>*/
+  </style>
+</head>
 
+<body>
+  <a href="https://github.com/zaf/asterisk-ispeech"><img class="c1" src=
+  "http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt=
+  "Fork me on GitHub" /></a>
 
-        <ul>
-          <li><a href="https://github.com/zaf/asterisk-ispeech/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/zaf/asterisk-ispeech/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/zaf/asterisk-ispeech">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1></h1>
+  <div id="container">
+    <div class="download">
+      <a href="https://github.com/zaf/asterisk-ispeech/zipball/master"><img border="0" width=
+      "90" src="https://github.com/images/modules/download/zip.png" /></a> <a href=
+      "https://github.com/zaf/asterisk-ispeech/tarball/master"><img border="0" width="90" src=
+      "https://github.com/images/modules/download/tar.png" /></a>
+    </div>
 
-<pre><code>   iSpeech plugins for Asterisk
-</code></pre>
+    <h1><a href="https://github.com/zaf/asterisk-ispeech">iSpeech plugins for
+    Asterisk</a></h1>
 
-<h1></h1>
+    <div class="description">
+	Automatic Speech Recognition and Text To Speech plugins for Asterisk that use the iSpeech API.
+    </div>
 
-<p>These plugins provide access to iSpeech Text To Speech and Automatic Speech Recognition
-services making them available for use with Asterisk PBX.
-<a href="http://www.ispeech.org/">http://www.ispeech.org/</a></p>
+    <p>These AGI scripts makes use of iSpeech's API in order to provide ASR and TTS capabilities 
+	on Asterisk PBX. See <a href=
+    "https://raw.github.com/zaf/asterisk-ispeech/master/README">README</a> for a complete list
+    of features and supported languages.</p>
 
-<hr><h2>Requirements</h2>
+    <h2>Dependencies</h2>
 
-<p>Perl          The Perl Programming Language
-perl-libwww   The World-Wide Web library for Perl
-IO-Socket-SSL Perl module that implements an interface to SSL sockets.</p>
+    <p>Perl: The Perl Programming Language<br />
+    perl-libwww: The World-Wide Web library for Perl<br />
+	IO-Socket-SSL: Perl module that implements an interface to SSL sockets<br />
+    Internet access in order to contact iSpeech servers and get the speech and text data.<br />
+    speex: Patent-free audio compression format designed for speech (Optional).</p>
 
-<p>Internet access in order to contact google and get the speech data.
-** Optional**
-speex         patent-free audio compression format designed for speech.</p>
+    <h2>Install</h2>
 
-<hr><h2>Installation</h2>
+    <p>To install copy ispeech-asr.agi and ispeech-tts.agi to your agi-bin directory.<br />
+    Usually this is /var/lib/asterisk/agi-bin/<br />
+    To make sure check your /etc/asterisk/asterisk.conf file</p>
 
-<p>To install copy ispeech-asr.agi and ispeech-tts.agi to your agi-bin directory.
-Usually this is /var/lib/asterisk/agi-bin/
-To make sure check your /etc/asterisk/asterisk.conf file</p>
+    <h2>Usage</h2>
+	<h4>TTS:</h4>
+    <p><b>agi(ispeech-tts.agi,"text",[voice],[intkey],[speed])</b>: 
+	This will invoke the iSpeech TTS engine, render the text string to speech and play it
+	back to the user. If 'intkey' is set the script will wait for user input.
+	Any given interrupt keys will cause the playback to immediately terminate and
+	the dialplan to proceed to the matching extension (this is mainly for use in IVR,
+	see README for examples). If 'speed' is set the speech rate is altered by that factor.<br />
+    <h4>ASR:</h4>
+	<p><b>agi(ispeech-asr.agi,[lang],[freeform],[model],[timeout],[intkey],[NOBEEP])</b>:
+	Records from the current channel untill 3 seconds of silence are detected
+	(this can be set by the user by the 'timeout' argument, -1 for no timeout) or the
+	interrupt key (# by default) is pressed. If NOBEEP is set, no beep sound is played
+	back to the user to indicate the start of the recording. For 'freeform' and 'model'
+	please refer to the ispeech API manual. 'freeform' defaults to 3 (Normal speech)
+	The recorded sound is send over to iSpeech ASR service and the
+	returned text string is assigned as the value of the channel variable 'utterance'.<br />
 
-<hr><h2>Usage</h2>
+	The scripts sets the following channel variables:<br />
+    <b>status:</b> Return status. 0 means success, non zero values indicating different
+    errors.<br />
+    <b>utterance:</b> The generated text string.<br />
+    <b>confidence:</b> A value between 0 and 1 indicating the probability of a correct
+    recognition.Values bigger than 0.90 usually mean that the resulted text is correct.<br /></p>
 
-<p>agi(ispeech-tts.agi,"text",[voice],[intkey],[speed]):
-This will invoke the iSpeech TTS engine, render the text string to speech and play it
-back to the user. If 'intkey' is set the script will wait for user input.
-Any given interrupt keys will cause the playback to immediately terminate and
-the dialplan to proceed to the matching extension (this is mainly for use in IVR,
-see README for examples). If 'speed' is set the speech rate is altered by that factor.</p>
-
-<p>agi(ispeech-asr.agi,[lang],[freeform],[model],[timeout],[intkey],[NOBEEP]):
-Records from the current channel untill 3 seconds of silence are detected
-(this can be set by the user by the 'timeout' argument, -1 for no timeout) or the
-interrupt key (# by default) is pressed. If NOBEEP is set, no beep sound is played
-back to the user to indicate the start of the recording. For 'freeform' and 'model'
-please refer to the ispeech API manual. 'freeform' defaults to 3 (Normal speech)
-The recorded sound is send over to iSpeech ASR service and the
-returned text string is assigned as the value of the channel variable 'utterance'.</p>
-
-<p>The script sets the following channel variables:
-status     : Return status. 0 means success, non zero values indicate different errors.
-utterance  : The generated text string.
-confidence : A value between 0 and 1 indicating how 'confident' the recognition engine
-    feels about the result. Values bigger than 0.90 usually mean that the
-    resulted text is correct.</p>
-
-<hr><h2>Examples</h2>
-
-<p>sample dialplan code for your extensions.conf</p>
-
-<p>;iSpeech TTS test
+    <h4>Asterisk dialplan examples:<br /></h4>
+    <pre>
+;iSpeech TTS test
 exten =&gt; 3,1,Answer()
 exten =&gt; 3,n,agi(ispeech-tts.agi,"This is a test of the ispeech text to speech engine in asterisk.")
 exten =&gt; 3,n,agi(ispeech-tts.agi,"Esta es una simple prueba en español.",usspanishfemale)
 exten =&gt; 3,n,agi(ispeech-tts.agi,"这是一个简单的测试，在中国。有一个愉快的一天。",chchinesefemale)
-exten =&gt; 3,n,Hangup()</p>
+exten =&gt; 3,n,Hangup()
 
-<p>;Speech recognition test
+</pre>
+    <pre>
+;Speech recognition test
 exten =&gt; 4,1,Answer()
 exten =&gt; 4,n,agi(ispeech-tts.agi,"Please say something in English. When done press the pound key.")
 exten =&gt; 4,n(record),agi(ispeech-asr.agi,en-US)
 exten =&gt; 4,n,Noop(== Script returned: ${status} , ${confidence} , ${utterance} ==)
-exten =&gt; 4,n,GotoIf($["${status}" = "0"]?success:fail)</p>
+exten =&gt; 4,n,GotoIf($["${status}" = "0"]?success:fail)
 
-<p>exten =&gt; 4,n(success),GotoIf($["${confidence}" &gt; "0.3"]?playback:retry)</p>
+exten =&gt; 4,n(success),GotoIf($["${confidence}" > "0.3"]?playback:retry)
 
-<p>exten =&gt; 4,n(retry),agi(ispeech-tts.agi,"Can you please repeat more clearly?")
-exten =&gt; 4,n,goto(record)</p>
+exten =&gt; 4,n(retry),agi(ispeech-tts.agi,"Can you please repeat more clearly?")
+exten =&gt; 4,n,goto(record)
 
-<p>exten =&gt; 4,n(playback),agi(ispeech-tts.agi,"The text you just said was...")
+exten =&gt; 4,n(playback),agi(ispeech-tts.agi,"The text you just said was...")
 exten =&gt; 4,n,agi(ispeech-tts.agi,"${utterance}")
-exten =&gt; 4,n,goto(end)</p>
+exten =&gt; 4,n,goto(end)
 
-<p>exten =&gt; 4,n(fail),agi(ispeech-tts.agi,"Failed to get speech data.")
-exten =&gt; 4,n(end),Hangup()</p>
+exten =&gt; 4,n(fail),agi(ispeech-tts.agi,"Failed to get speech data.")
+exten =&gt; 4,n(end),Hangup()
 
-<p>;Voice dialing example
+</pre>
+    <pre>
+;Voice dialing example
 exten =&gt; 5,1,Answer()
 exten =&gt; 5,n,agi(ispeech-tts.agi,"Please say the number you wish to dial.")
 exten =&gt; 5,n(record),agi(ispeech-asr.agi,en-US,,phonenumber)
-exten =&gt; 5,n,GotoIf($[$["${status}" = "0"] &amp; $["${confidence}" &gt; "0.3"]]?success:retry)</p>
+exten =&gt; 5,n,GotoIf($[$["${status}" = "0"] & $["${confidence}" > "0.3"]]?success:retry)
 
-<p>exten =&gt; 5,(success),agi(ispeech-tts.agi,"Dialing ${utterance}")
-exten =&gt; 5,n,goto(${utterance},1)</p>
+exten =&gt; 5,(success),agi(ispeech-tts.agi,"Dialing ${utterance}")
+exten =&gt; 5,n,goto(${utterance},1)
 
-<p>exten =&gt; 5,n(retry),agi(ispeech-tts.agi,"Can you please repeat?")
-exten =&gt; 5,n,goto(record)</p>
+exten =&gt; 5,n(retry),agi(ispeech-tts.agi,"Can you please repeat?")
+exten =&gt; 5,n,goto(record)
 
-<p>;IVR test
-exten =&gt; 6,1,goto(my_ivr,s,1)</p>
+</pre>
+	<pre>
+;IVR test
+exten =&gt; 6,1,goto(my_ivr,s,1)
 
-<p>[my_ivr]
+[my_ivr]
 exten =&gt; s,1,Answer()
 exten =&gt; s,n,Set(TIMEOUT(digit)=5)
 exten =&gt; s,n,Set(TIMEOUT(response)=8)
 exten =&gt; s,n,agi(ispeech-tts.agi,"Welcome to my small interactive voice response menu.")
 exten =&gt; s,n(start),agi(ispeech-tts.agi,"Please dial a digit.",,any)
-exten =&gt; s,n,Waitexten()</p>
+exten =&gt; s,n,Waitexten()
 
-<p>exten =&gt; _X,1,agi(ispeech-tts.agi,"You just pressed ${EXTEN}. Try another one please.",,any)
-exten =&gt; _X,n,Waitexten()</p>
+exten =&gt; _X,1,agi(ispeech-tts.agi,"You just pressed ${EXTEN}. Try another one please.",,any)
+exten =&gt; _X,n,Waitexten()
 
-<p>exten =&gt; i,1,agi(ispeech-tts.agi,"Invalid extension.")
-exten =&gt; i,n,goto(s,start)</p>
+exten =&gt; i,1,agi(ispeech-tts.agi,"Invalid extension.")
+exten =&gt; i,n,goto(s,start)
 
-<p>exten =&gt; t,1,agi(ispeech-tts.agi,"Request timed out.")
-exten =&gt; t,n,goto(h,1)</p>
+exten =&gt; t,1,agi(ispeech-tts.agi,"Request timed out.")
+exten =&gt; t,n,goto(h,1)
 
-<hr><h2>License</h2>
+</pre><br />
 
-<p>The iSpeech asterisk plugins are distributed under the GNU General Public
-License v2. See LICENSE for details.</p>
 
-<hr><h2>Homepage</h2>
+    <h2>License</h2>
 
-<p><a href="https://github.com/zaf">https://github.com/zaf</a></p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/zaf">zaf</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+    <p>The iSpeech plugins for asterisk are distributed under the GNU General Public License
+    v2.</p>
+
+    <h2>Authors</h2>
+
+    <p><a href="http://github.com/zaf">Lefteris Zafiris</a> (zaf.000@gmail.com)<br /></p>
+
+    <h2>Download</h2>
+
+    <p>
+    Develompent snapshots are available in either <a href=
+    "https://github.com/zaf/asterisk-ispeech/zipball/master">zip</a> or <a href=
+    "https://github.com/zaf/asterisk-ispeech/tarball/master">tar formats.</a></p><a href=
+    "https://github.com/zaf/asterisk-ispeech/tarball/master"></a>
+
+    <p>You can also clone the project with <a href="http://git-scm.com">Git</a> by running:</p>
+    <pre>
+$ git clone git://github.com/zaf/asterisk-ispeech
+</pre>
+
+    <h2>Links</h2>
+
+    <p><a href="http://zaf.github.com/asterisk-googletts/">GoogleTTS text to speech script for
+    asterisk</a><br />
+	<a href="http://zaf.github.com/asterisk-speech-recog/">Speech Recognition for asterisk using
+	Google</a><br />
+	<a href="http://zaf.github.com/asterisk-googletranslate/">Text translation using Google Trnanslate
+    API for Asterisk</a><br />
+    <a href="http://zaf.github.com/asterisk-mstts/">Speech synthesis using Microsoft Translator
+    API for Asterisk</a><br />
+    <a href="http://zaf.github.com/Asterisk-Flite/">Asterisk Flite text to speech module</a><br />
+    <a href="http://zaf.github.com/Asterisk-eSpeak/">Asterisk e-Speak text to speech module</a></p>
+
+    <div class="footer">
+      get the source code on GitHub : <a href=
+      "https://github.com/zaf/asterisk-ispeech">zaf/asterisk-ispeech</a>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+  </div>
+</body>
 </html>
