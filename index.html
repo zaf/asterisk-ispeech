@@ -74,10 +74,10 @@
 	<a href="http://www.ispeech.org/">iSpeech API</a>
     </div>
 
-    <p>These AGI scripts makes use of <a href="http://www.ispeech.org/">iSpeech API</a> in order to provide ASR and TTS capabilities 
-	on Asterisk PBX. See <a href=
+    <p>These AGI scripts make use of <a href="http://www.ispeech.org/">iSpeech API</a> in order to provide ASR and TTS
+	capabilities for Asterisk PBX. See <a href=
     "https://raw.github.com/zaf/asterisk-ispeech/master/README">README</a> for a complete list
-    of features and supported languages.</p>
+    of features.</p>
 
     <h2>Dependencies</h2>
 
@@ -136,7 +136,7 @@ exten =&gt; 4,n(record),agi(ispeech-asr.agi,en-US)
 exten =&gt; 4,n,Noop(== Script returned: ${status} , ${confidence} , ${utterance} ==)
 exten =&gt; 4,n,GotoIf($["${status}" = "0"]?success:fail)
 
-exten =&gt; 4,n(success),GotoIf($["${confidence}" > "0.3"]?playback:retry)
+exten =&gt; 4,n(success),GotoIf($["${confidence}" &gt; "0.3"]?playback:retry)
 
 exten =&gt; 4,n(retry),agi(ispeech-tts.agi,"Can you please repeat more clearly?")
 exten =&gt; 4,n,goto(record)
@@ -154,7 +154,7 @@ exten =&gt; 4,n(end),Hangup()
 exten =&gt; 5,1,Answer()
 exten =&gt; 5,n,agi(ispeech-tts.agi,"Please say the number you wish to dial.")
 exten =&gt; 5,n(record),agi(ispeech-asr.agi,en-US,,phonenumber)
-exten =&gt; 5,n,GotoIf($[$["${status}" = "0"] & $["${confidence}" > "0.3"]]?success:retry)
+exten =&gt; 5,n,GotoIf($[$["${status}" = "0"] & $["${confidence}" &gt; "0.3"]]?success:retry)
 
 exten =&gt; 5,(success),agi(ispeech-tts.agi,"Dialing ${utterance}")
 exten =&gt; 5,n,goto(${utterance},1)
