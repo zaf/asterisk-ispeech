@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Asterisk-ispeech by zaf</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Asterisk-ispeech</h1>
+        <p>AGI scripts for TTS and ASR using iSpeech service</p>
+
+        <p class="view"><a href="https://github.com/zaf/asterisk-ispeech">View the Project on GitHub <small>zaf/asterisk-ispeech</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/zaf/asterisk-ispeech/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/zaf/asterisk-ispeech/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/zaf/asterisk-ispeech">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1></h1>
+
+<pre><code>   iSpeech plugins for Asterisk
+</code></pre>
+
+<h1></h1>
+
+<p>These plugins provide access to iSpeech Text To Speech and Automatic Speech Recognition
+services making them available for use with Asterisk PBX.
+<a href="http://www.ispeech.org/">http://www.ispeech.org/</a></p>
+
+<hr><h2>Requirements</h2>
+
+<p>Perl          The Perl Programming Language
+perl-libwww   The World-Wide Web library for Perl
+IO-Socket-SSL Perl module that implements an interface to SSL sockets.</p>
+
+<p>Internet access in order to contact google and get the speech data.
+** Optional**
+speex         patent-free audio compression format designed for speech.</p>
+
+<hr><h2>Installation</h2>
+
+<p>To install copy ispeech-asr.agi and ispeech-tts.agi to your agi-bin directory.
+Usually this is /var/lib/asterisk/agi-bin/
+To make sure check your /etc/asterisk/asterisk.conf file</p>
+
+<hr><h2>Usage</h2>
+
+<p>agi(ispeech-tts.agi,"text",[voice],[intkey],[speed]):
+This will invoke the iSpeech TTS engine, render the text string to speech and play it
+back to the user. If 'intkey' is set the script will wait for user input.
+Any given interrupt keys will cause the playback to immediately terminate and
+the dialplan to proceed to the matching extension (this is mainly for use in IVR,
+see README for examples). If 'speed' is set the speech rate is altered by that factor.</p>
+
+<p>agi(ispeech-asr.agi,[lang],[freeform],[model],[timeout],[intkey],[NOBEEP]):
+Records from the current channel untill 3 seconds of silence are detected
+(this can be set by the user by the 'timeout' argument, -1 for no timeout) or the
+interrupt key (# by default) is pressed. If NOBEEP is set, no beep sound is played
+back to the user to indicate the start of the recording. For 'freeform' and 'model'
+please refer to the ispeech API manual. 'freeform' defaults to 3 (Normal speech)
+The recorded sound is send over to iSpeech ASR service and the
+returned text string is assigned as the value of the channel variable 'utterance'.</p>
+
+<p>The script sets the following channel variables:
+status     : Return status. 0 means success, non zero values indicate different errors.
+utterance  : The generated text string.
+confidence : A value between 0 and 1 indicating how 'confident' the recognition engine
+    feels about the result. Values bigger than 0.90 usually mean that the
+    resulted text is correct.</p>
+
+<hr><h2>Examples</h2>
+
+<p>sample dialplan code for your extensions.conf</p>
+
+<p>;iSpeech TTS test
+exten =&gt; 3,1,Answer()
+exten =&gt; 3,n,agi(ispeech-tts.agi,"This is a test of the ispeech text to speech engine in asterisk.")
+exten =&gt; 3,n,agi(ispeech-tts.agi,"Esta es una simple prueba en español.",usspanishfemale)
+exten =&gt; 3,n,agi(ispeech-tts.agi,"这是一个简单的测试，在中国。有一个愉快的一天。",chchinesefemale)
+exten =&gt; 3,n,Hangup()</p>
+
+<p>;Speech recognition test
+exten =&gt; 4,1,Answer()
+exten =&gt; 4,n,agi(ispeech-tts.agi,"Please say something in English. When done press the pound key.")
+exten =&gt; 4,n(record),agi(ispeech-asr.agi,en-US)
+exten =&gt; 4,n,Noop(== Script returned: ${status} , ${confidence} , ${utterance} ==)
+exten =&gt; 4,n,GotoIf($["${status}" = "0"]?success:fail)</p>
+
+<p>exten =&gt; 4,n(success),GotoIf($["${confidence}" &gt; "0.3"]?playback:retry)</p>
+
+<p>exten =&gt; 4,n(retry),agi(ispeech-tts.agi,"Can you please repeat more clearly?")
+exten =&gt; 4,n,goto(record)</p>
+
+<p>exten =&gt; 4,n(playback),agi(ispeech-tts.agi,"The text you just said was...")
+exten =&gt; 4,n,agi(ispeech-tts.agi,"${utterance}")
+exten =&gt; 4,n,goto(end)</p>
+
+<p>exten =&gt; 4,n(fail),agi(ispeech-tts.agi,"Failed to get speech data.")
+exten =&gt; 4,n(end),Hangup()</p>
+
+<p>;Voice dialing example
+exten =&gt; 5,1,Answer()
+exten =&gt; 5,n,agi(ispeech-tts.agi,"Please say the number you wish to dial.")
+exten =&gt; 5,n(record),agi(ispeech-asr.agi,en-US,,phonenumber)
+exten =&gt; 5,n,GotoIf($[$["${status}" = "0"] &amp; $["${confidence}" &gt; "0.3"]]?success:retry)</p>
+
+<p>exten =&gt; 5,(success),agi(ispeech-tts.agi,"Dialing ${utterance}")
+exten =&gt; 5,n,goto(${utterance},1)</p>
+
+<p>exten =&gt; 5,n(retry),agi(ispeech-tts.agi,"Can you please repeat?")
+exten =&gt; 5,n,goto(record)</p>
+
+<p>;IVR test
+exten =&gt; 6,1,goto(my_ivr,s,1)</p>
+
+<p>[my_ivr]
+exten =&gt; s,1,Answer()
+exten =&gt; s,n,Set(TIMEOUT(digit)=5)
+exten =&gt; s,n,Set(TIMEOUT(response)=8)
+exten =&gt; s,n,agi(ispeech-tts.agi,"Welcome to my small interactive voice response menu.")
+exten =&gt; s,n(start),agi(ispeech-tts.agi,"Please dial a digit.",,any)
+exten =&gt; s,n,Waitexten()</p>
+
+<p>exten =&gt; _X,1,agi(ispeech-tts.agi,"You just pressed ${EXTEN}. Try another one please.",,any)
+exten =&gt; _X,n,Waitexten()</p>
+
+<p>exten =&gt; i,1,agi(ispeech-tts.agi,"Invalid extension.")
+exten =&gt; i,n,goto(s,start)</p>
+
+<p>exten =&gt; t,1,agi(ispeech-tts.agi,"Request timed out.")
+exten =&gt; t,n,goto(h,1)</p>
+
+<hr><h2>License</h2>
+
+<p>The iSpeech asterisk plugins are distributed under the GNU General Public
+License v2. See LICENSE for details.</p>
+
+<hr><h2>Homepage</h2>
+
+<p><a href="https://github.com/zaf">https://github.com/zaf</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/zaf">zaf</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
