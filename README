@@ -2,8 +2,9 @@
        iSpeech plugins for Asterisk
 ==============================================
 
-These plugins provide access to iSpeech speech recognition and speech synthesis services
-making it available for use with Asterisk PBX.
+These plugins provide access to iSpeech Text To Speech and Automatic Speech Recognition
+services making them available for use with Asterisk PBX.
+http://www.ispeech.org/
 
 ------------
 Requirements
@@ -120,7 +121,7 @@ exten => t,n,goto(h,1)
 -------
 License
 -------
-The speech-recog script for asterisk is distributed under the GNU General Public
+The iSpeech asterisk plugins are distributed under the GNU General Public
 License v2. See LICENSE for details.
 
 --------

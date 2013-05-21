@@ -1,7 +1,8 @@
 #!/usr/bin/env perl
 
 #
-# AGI script that renders speech to text using Ispeech speech recognition engine.
+# AGI script that renders speech to text using iSpeech speech recognition engine.
+# http://www.ispeech.org/
 #
 # Copyright (C) 2011 - 2013, Lefteris Zafiris <zaf.000@gmail.com>
 #
@@ -9,7 +10,7 @@
 # the GNU General Public License Version 2. See the LICENSE file
 # at the top of the source tree.
 #
-# The Asterisk ispeech plugin developmend was funded by ifbyphone http://ifbyphone.com/
+# The Asterisk iSpeech plugin developmend was funded by ifbyphone http://ifbyphone.com/
 #
 # -----
 # Usage

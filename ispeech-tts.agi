@@ -2,6 +2,7 @@
 
 #
 # AGI script that uses iSpeech text to speech engine.
+# http://www.ispeech.org/
 #
 # Copyright (C) 2011 - 2013, Lefteris Zafiris <zaf.000@gmail.com>
 #
