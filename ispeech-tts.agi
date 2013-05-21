@@ -3,10 +3,13 @@
 #
 # AGI script that uses iSpeech text to speech engine.
 #
-# Copyright (C) 2011 - 2012, Eleftherios (Lefteris) Zafeiris <zaf.000@gmail.com>
+# Copyright (C) 2011 - 2013, Lefteris Zafiris <zaf.000@gmail.com>
 #
-# asterisk-tts.agi is distributed under the BSD license
-# see LICENSE for details.
+# This program is free software, distributed under the terms of
+# the GNU General Public License Version 2. See the LICENSE file
+# at the top of the source tree.
+#
+# The Asterisk ispeech plugin developmend was funded by ifbyphone http://ifbyphone.com/
 #
 # -----
 # Usage
@@ -43,7 +46,7 @@ $| = 1;
 #   User defined parameters:    #
 # ----------------------------- #
 # Ispeech API key
-my $key = "";
+my $key = "developerdemonkeydeveloperdemonkey";
 
 # Default voice                 #
 my $voice = "usenglishfemale";
@@ -58,10 +61,10 @@ my $speed = 1;
 my $usecache = 0;
 
 # Cache directory path          #
-my $cachedir = "/var/lib/asterisk/ispeech";
+my $cachedir = "/tmp";
 
 # Use SSL                       #
-my $use_ssl = 0;
+my $use_ssl = 1;
 
 # Verbose debugging messages    #
 my $debug = 0;

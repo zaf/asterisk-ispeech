@@ -3,10 +3,13 @@
 #
 # AGI script that renders speech to text using Ispeech speech recognition engine.
 #
-# Copyright (C) 2011 - 2012, Eleftherios (Lefteris) Zafeiris <zaf.000@gmail.com>
+# Copyright (C) 2011 - 2013, Lefteris Zafiris <zaf.000@gmail.com>
 #
-# asterisk-tts.agi is distributed under the BSD license
-# see LICENSE for details.
+# This program is free software, distributed under the terms of
+# the GNU General Public License Version 2. See the LICENSE file
+# at the top of the source tree.
+#
+# The Asterisk ispeech plugin developmend was funded by ifbyphone http://ifbyphone.com/
 #
 # -----
 # Usage
@@ -19,7 +22,7 @@
 # please refer to the ispeech API manual. 'freeform' defaults to 3 (Normal speech)
 # The recorded sound is send over to iSpeech ASR service and the
 # returned text string is assigned as the value of the channel variable 'utterance'.
-# The scripts sets the following channel variables:
+# The script sets the following channel variables:
 # status     : Return status. 0 means success, non zero values indicate different errors.
 # utterance  : The generated text string.
 # confidence : A value between 0 and 1 indicating how 'confident' the recognition engine
@@ -58,7 +61,7 @@ $| = 1;
 #   User defined parameters:    #
 # ----------------------------- #
 # Ispeech API key               #
-my $key = "";
+my $key = "developerdemonkeydeveloperdemonkey";
 
 # Default language              #
 my $language = "en-US";
@@ -73,7 +76,7 @@ my $intkey = "#";
 my $use_speex = 0;
 
 # Use SSL                       #
-my $use_ssl = 0;
+my $use_ssl = 1;
 
 # Verbose debugging messages    #
 my $debug = 0;

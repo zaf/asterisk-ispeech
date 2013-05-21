@@ -6,3 +6,6 @@
 2013-02-03 Lefteris Zafiris <zaf.000@gmail.com> - 0.2
 	Proper error handling. HTTPS support. Model and
 	freeform support for ASR module.
+
+2013-05-21 Lefteris Zafiris <zaf.000@gmail.com> - 0.3
+	Re-licensed under GPL v2. First public release.
