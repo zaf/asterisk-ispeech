@@ -122,6 +122,85 @@ exten => i,n,goto(s,start)
 exten => t,1,agi(ispeech-tts.agi,"Request timed out.")
 exten => t,n,goto(h,1)
 
+
+-----------------------
+TTS Supported Languages
+-----------------------
+Standard Voices				Name Alias
+=================================================
+US English Female			usenglishfemale (default)
+US English Male				usenglishmale
+UK English Female			ukenglishfemale
+UK English Male				ukenglishmale
+Australian English			Female auenglishfemale
+US Spanish Female			usspanishfemale
+US Spanish Male				usspanishmale
+Chinese Female				chchinesefemale
+Chinese Male				chchinesemale
+Hong Kong Cantonese Female	hkchinesefemale
+Taiwan Chinese Female		twchinesefemale
+Japanese Female				jpjapanesefemale
+Japanese Male				jpjapanesemale
+Korean Female				krkoreanfemale
+Korean Male					krkoreanmale
+Canadian English Female		caenglishfemale
+Hungarian Female			huhungarianfemale
+Brazilian Portuguese Female	brportuguesefemale
+European Portuguese Female	eurportuguesefemale
+European Portuguese Male	eurportuguesemale
+European Spanish Female		eurspanishfemale
+European Spanish Male		eurspanishmale
+European Catalan Female		eurcatalanfemale
+European Czech Female		eurczechfemale
+European Danish Female		eurdanishfemale
+European Finnish Female		eurfinnishfemale
+European French Female		eurfrenchfemale
+European French Male		eurfrenchmale
+European Norwegian Female	eurnorwegianfemale
+European Dutch Female		eurdutchfemale
+European Polish Female		eurpolishfemale
+European Italian Female		euritalianfemale
+European Turkish Female		eurturkishfemale
+European Turkish Male		eurturkishmale
+European German Female		eurgermanfemale
+European German Male		eurgermanmale
+Russian Female				rurussianfemale
+Russian Male				rurussianmale
+Swedish Female				swswedishfemale
+Canadian French Female		cafrenchfemale
+Canadian French Male		cafrenchmale
+
+-----------------------
+ASR Supported Languages
+-----------------------
+Language				Alias
+=======================================
+English (US)			en-US (default)
+English (Canada)		en-CA
+English (UK)			en-GB
+English (Australia)		en-AU
+Spanish (Spain)			es-ES
+Spanish (Mexico)		es-MX
+Italian (Italy)			it-IT
+French (France)			fr-FR
+French (Canada)			fr-CA
+Polish (Poland)			pl-PL
+Portuguese (Portugal)	pt-PT
+Catalan (Catalan)		ca-ES
+Chinese (Taiwan)		zh-TW
+Danish (Denmark)		da-DK
+German (Germany)		fr-FR
+Finnish (Finland)		it-IT
+Japanese (Japan)		ja-JP
+Korean (Korea)			ko-KR
+Dutch (Netherlands)		nl-NL
+Norwegian (Norway)		nb-NO
+Portuguese (Brazil)		pt-BR
+Russian (Russia)		ru-RU
+Swedish (Sweden)		sv-SE
+Chinese (China)			zh-CN
+Chinese (Hong Kong)		zh-HK
+
 -------
 License
 -------

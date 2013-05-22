@@ -36,12 +36,15 @@
 
 use warnings;
 use strict;
+use utf8;
+use Encode qw(decode encode);
 use Digest::MD5 qw(md5_hex);
 use File::Path qw(mkpath);
 use CGI::Util qw(escape unescape);
 use LWP::UserAgent;
 use LWP::ConnCache;
 $| = 1;
+
 
 # ----------------------------- #
 #   User defined parameters:    #
@@ -53,7 +56,7 @@ my $key = "developerdemonkeydeveloperdemonkey";
 my $voice = "usenglishfemale";
 
 # API word limit
-my $word_limit  = "50";
+my $word_limit  = 50;
 
 # Output speed factor           #
 my $speed = 1;
@@ -68,7 +71,7 @@ my $cachedir = "/tmp";
 my $use_ssl = 1;
 
 # Verbose debugging messages    #
-my $debug = 0;
+my $debug = 1;
 
 # ----------------------------- #
 
@@ -98,7 +101,7 @@ $name = " -- $AGI{request}:";
 
 
 # Sanitising input #
-$word_limit--;
+$AGI{arg_1} = decode('utf8', $AGI{arg_1});
 for ($AGI{arg_1}) {
 	s/[\\|*~<>^\(\)\[\]\{\}[:cntrl:]]/ /g;
 	s/\s+/ /g;
@@ -106,7 +109,7 @@ for ($AGI{arg_1}) {
 	die "$name No text passed for synthesis.\n" if (!length);
 	# Split input to comply with word limits #
 	$_ .= "." unless (/^.+[.,?!:;]$/);
-	@text = /(?:\W*+\w++){1,$word_limit}[.,?!:;]|(?:\W*+\w++){1,$word_limit}\s/g;
+	@text = /(?:\W*\w+){1,$word_limit}[.,?!:;]+|(?:\W*\w+){1,$word_limit}\s+/g;
 }
 
 # Setting voice, interrupt keys and speed rate #
@@ -159,6 +162,7 @@ $ua->conn_cache(LWP::ConnCache->new());
 $ua->timeout($timeout);
 
 foreach my $line (@text) {
+	$line = encode('utf8', $line);
 	$line =~ s/^\s+|\s+$//g;
 	last if (length($line) == 0);
 	if ($debug) {
