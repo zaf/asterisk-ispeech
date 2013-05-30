@@ -62,7 +62,7 @@ $| = 1;
 #   User defined parameters:    #
 # ----------------------------- #
 # Ispeech API key               #
-my $key = "developerdemonkeydeveloperdemonkey";
+my $key = "developerdemokeydeveloperdemokey";
 
 # Default language              #
 my $language = "en-US";
