@@ -12,6 +12,7 @@ Requirements
 Perl          The Perl Programming Language
 perl-libwww   The World-Wide Web library for Perl
 IO-Socket-SSL Perl module that implements an interface to SSL sockets.
+format_mp3    Asterisk mp3 format support.
 
 An API key from iSpeech: To obtain an API key please visit:
 http://www.ispeech.org/developers and register for a developer account.

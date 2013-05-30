@@ -77,10 +77,13 @@ my $intkey = "#";
 my $use_speex = 0;
 
 # Use SSL                       #
-my $use_ssl = 1;
+my $use_ssl = 0;
 
 # Verbose debugging messages    #
-my $debug = 0;
+my $debug = 1;
+
+#Playback recorded speech       #
+my $replay_rec = 0;
 
 # ----------------------------- #
 
@@ -100,7 +103,7 @@ my $model;
 my $freeform   = 3;
 my $format     = "wav";
 my $beep       = "BEEP";
-my $ua_timeout = 10;
+my $ua_timeout = 15;
 my $tmpdir     = "/tmp";
 my $host       = "api.ispeech.org/api/rest";
 my $speex      = `/usr/bin/which speexenc`;
@@ -206,6 +209,13 @@ print "RECORD FILE $tmpname $format \"$intkey\" \"-1\" $beep \"$silence\"\n";
 @result = checkresponse();
 die "$name Failed to record file, aborting...\n" if ($result[0] == -1);
 
+# Replay back recorded data #
+if ($replay_rec) {
+	warn "$name Playing back recorded data:" if ($debug);
+	print "STREAM FILE $tmpname \"\"\n";
+	@result = checkresponse();
+}
+
 if ($debug) {
 	warn "$name Recording Format: $format, ",
 		"Encoding format: ", ($use_speex) ? "speex" : "wav", "\n",
@@ -248,9 +258,10 @@ $url .= "&speexmode=1" if ($use_speex);
 
 # Send adio data for analysis #
 $uaresponse = $ua->post("$url");
-die "$name Unable to get speech data.\n" if (!$uaresponse->is_success);
 
 warn "$name The response was: ", $uaresponse->decoded_content if ($debug);
+die "$name Unable to get speech data.\n" if (!$uaresponse->is_success);
+
 if ($uaresponse->code != 200) {
 	die "$name An iSpeech API error occured: " . unescape($uaresponse->decoded_content) . "\n";
 }
