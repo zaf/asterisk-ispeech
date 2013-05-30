@@ -190,6 +190,8 @@ foreach my $line (@text) {
 		"$url?apikey=$key&action=convert&text=$line&voice=$voice&format=$format&frequency=$frequency&speed=$speed",
 		':content_file' => "$cachedir/$filename.$format",
 	);
+
+	warn "$name The response was: ", $ua_response->decoded_content if ($debug);
 	die "$name Failed to fetch voice data.\n" unless ($ua_response->is_success);
 	if ($ua_response->code != 200) {
 		my $error = <$fh>;
