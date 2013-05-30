@@ -68,7 +68,7 @@ my $usecache = 0;
 my $cachedir = "/tmp";
 
 # Use SSL                       #
-my $use_ssl = 1;
+my $use_ssl = 0;
 
 # Verbose debugging messages    #
 my $debug = 1;
