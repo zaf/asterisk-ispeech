@@ -70,7 +70,7 @@
     Asterisk</a></h1>
 
     <div class="description">
-	Automatic Speech Recognition and Text To Speech plugins for Asterisk that use the 
+	Automatic Speech Recognition and Text To Speech plugins for Asterisk that use the
 	<a href="http://www.ispeech.org/">iSpeech API</a>
     </div>
 
@@ -84,6 +84,7 @@
     <p>Perl: The Perl Programming Language<br />
     perl-libwww: The World-Wide Web library for Perl<br />
 	IO-Socket-SSL: Perl module that implements an interface to SSL sockets<br />
+	format_mp3: Asterisk module that supports mp3 playback<br />
     Internet access in order to contact iSpeech servers and get the speech and text data.<br />
     speex: Patent-free audio compression format designed for speech (Optional).</p>
 
@@ -95,7 +96,7 @@
 
     <h2>Usage</h2>
 	<h4>TTS:</h4>
-    <p><b>agi(ispeech-tts.agi,"text",[voice],[intkey],[speed])</b>: 
+    <p><b>agi(ispeech-tts.agi,"text",[voice],[intkey],[speed])</b>:
 	This will invoke the iSpeech TTS engine, render the text string to speech and play it
 	back to the user. If 'intkey' is set the script will wait for user input.
 	Any given interrupt keys will cause the playback to immediately terminate and
