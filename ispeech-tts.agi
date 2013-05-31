@@ -40,7 +40,7 @@ use utf8;
 use Encode qw(decode encode);
 use Digest::MD5 qw(md5_hex);
 use File::Path qw(mkpath);
-use CGI::Util qw(escape unescape);
+use URI::Escape;
 use LWP::UserAgent;
 use LWP::ConnCache;
 $| = 1;
@@ -180,7 +180,7 @@ foreach my $line (@text) {
 			next;
 		}
 	}
-	$line = escape($line);
+	$line = uri_escape($line);
 	die "$name No API key found. Aborting.\n" if (!$key);
 	warn "$name URL passed: $url?apikey=$key&action=convert&text=$line&voice=$voice&format=$format&frequency=$frequency&speed=$speed\n" if ($debug);
 
@@ -197,7 +197,7 @@ foreach my $line (@text) {
 		my $error = <$fh>;
 		close($fh);
 		unlink "$cachedir/$filename.$format";
-		$error = unescape($error);
+		$error = uri_unescape($error);
 		die "$name An iSpeech API error occured: $error\n";
 	}
 	close($fh);

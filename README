@@ -9,10 +9,11 @@ http://www.ispeech.org/
 ------------
 Requirements
 ------------
-Perl          The Perl Programming Language
-perl-libwww   The World-Wide Web library for Perl
-IO-Socket-SSL Perl module that implements an interface to SSL sockets.
-format_mp3    Asterisk mp3 format support.
+Perl             The Perl Programming Language
+libwww-perl      The World-Wide Web library for Perl (LWP)
+IO::Socket::SSL  Perl module that implements an interface to SSL sockets.
+URI::Escape      Perl module for "URI escaping".
+format_mp3       Asterisk mp3 format support.
 
 An API key from iSpeech: To obtain an API key please visit:
 http://www.ispeech.org/developers and register for a developer account.
@@ -201,6 +202,16 @@ Russian (Russia)		ru-RU
 Swedish (Sweden)		sv-SE
 Chinese (China)			zh-CN
 Chinese (Hong Kong)		zh-HK
+
+-----------------------
+Security Considerations
+-----------------------
+These scripts contact iSpeech servers in order send the recorded voice or text and get back
+the resulted data. Consider enabling SSL to encrypt all the traffic between
+your pbx and iSpeech servers so no 3rd party can eavesdrop your communication.
+To do so please set:
+my $use_ssl = 1;
+in to the 'User defined parameters' in each AGI script.
 
 -------
 License

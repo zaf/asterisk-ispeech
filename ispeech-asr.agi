@@ -53,7 +53,7 @@
 use warnings;
 use strict;
 use MIME::Base64;
-use CGI::Util qw(escape unescape);
+use URI::Escape;
 use File::Temp qw(tempfile);
 use LWP::UserAgent;
 $| = 1;
@@ -239,17 +239,16 @@ if ($use_speex) {
 # Read audio data #
 $audio = do { local $/; <$fh> };
 close($fh);
-$audio = encode_base64($audio);
-$audio =~ s/\R//g;
+$audio = encode_base64($audio, "");
 
-$language = escape($language);
+$language = uri_escape($language);
 $url .= "?apikey=$key&action=recognize&locale=$language";
 
 if ($model) {
-	$model = escape($model);
+	$model = uri_escape($model);
 	$url .= "&model=$model";
 } else {
-	$freeform = escape($freeform);
+	$freeform = uri_escape($freeform);
 	$url .= "&freeform=$freeform";
 }
 
@@ -263,14 +262,15 @@ warn "$name The response was: ", $uaresponse->decoded_content if ($debug);
 die "$name Unable to get speech data.\n" if (!$uaresponse->is_success);
 
 if ($uaresponse->code != 200) {
-	die "$name An iSpeech API error occured: " . unescape($uaresponse->decoded_content) . "\n";
+	die "$name An iSpeech API error occured: " . uri_unescape($uaresponse->decoded_content) . "\n";
 }
 
 if ($uaresponse->decoded_content =~ /^text=(.*)&confidence=(.*)&result=(.*)$/) {
 	$response{status} = "0" if($3 eq "success");
 	warn "$name Error reading audio file\n" if ($response{status});
-	$response{utterance}  = unescape($1);
 	$response{confidence} = "$2";
+	$response{utterance}  = uri_unescape($1);
+	$response{utterance}  =~ s/\+/ /g;
 }
 
 foreach (keys %response) {
