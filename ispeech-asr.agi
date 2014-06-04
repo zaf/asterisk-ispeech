@@ -265,7 +265,7 @@ if ($uaresponse->code != 200) {
 	die "$name An iSpeech API error occured: " . uri_unescape($uaresponse->decoded_content) . "\n";
 }
 
-if ($uaresponse->decoded_content =~ /^text=(.*)&confidence=(.*)&result=(.*)$/) {
+if ($uaresponse->decoded_content =~ /^text=(.*?)&confidence=(.*?)&result=(.*?)$/) {
 	$response{status} = "0" if($3 eq "success");
 	warn "$name Error reading audio file\n" if ($response{status});
 	$response{confidence} = "$2";
