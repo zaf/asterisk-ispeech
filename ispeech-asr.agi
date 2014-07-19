@@ -110,13 +110,13 @@ my $speex      = `/usr/bin/which speexenc`;
 my @models     = qw(assistant date nfl nba usmoney numbersto9 numbersto99 numbersto999 time phonenumber streets sportsteam citystate);
 
 # Store AGI input #
+# $language    $freeform    $model       $timeout     $intkey      $beep #
+($AGI{arg_1}, $AGI{arg_2}, $AGI{arg_3}, $AGI{arg_4}, $AGI{arg_5}, $AGI{arg_6}) = @ARGV;
 while (<STDIN>) {
 	chomp;
 	last if (!length);
 	$AGI{$1} = $2 if (/^agi_(\w+)\:\s+(.*)$/);
 }
-# $language    $freeform    $model       $timeout     $intkey      $beep #
-($AGI{arg_1}, $AGI{arg_2}, $AGI{arg_3}, $AGI{arg_4}, $AGI{arg_5}, $AGI{arg_6}) = @ARGV;
 
 $name = " -- $AGI{request}:";
 
