@@ -67,10 +67,10 @@ my $usecache = 0;
 my $cachedir = "/tmp";
 
 # Use SSL                       #
-my $use_ssl = 0;
+my $use_ssl = 1;
 
 # Verbose debugging messages    #
-my $debug = 1;
+my $debug = 0;
 
 # ----------------------------- #
 
@@ -130,7 +130,7 @@ if (length($AGI{arg_4})) {
 }
 
 # Check cache path size: dir length + md5 + file extension #
-if ($usecache && ((length($cachedir) + 32 + 6) < $maxlen)) {
+if ($usecache && ((length($cachedir) + 32 + 6) > $maxlen)) {
 	mkpath("$cachedir") unless (-d "$cachedir");
 } else {
 	warn "$name Cache path size exceeds limit. Disabling cache.\n";

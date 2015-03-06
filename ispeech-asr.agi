@@ -78,10 +78,10 @@ my $intkey = "#";
 my $use_speex = 0;
 
 # Use SSL                       #
-my $use_ssl = 0;
+my $use_ssl = 1;
 
 # Verbose debugging messages    #
-my $debug = 1;
+my $debug = 0;
 
 #Playback recorded speech       #
 my $replay_rec = 0;
