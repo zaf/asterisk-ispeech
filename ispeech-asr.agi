@@ -52,6 +52,7 @@
 
 use warnings;
 use strict;
+use Encode qw(encode);
 use MIME::Base64;
 use URI::Escape;
 use File::Temp qw(tempfile);
@@ -77,10 +78,10 @@ my $intkey = "#";
 my $use_speex = 0;
 
 # Use SSL                       #
-my $use_ssl = 0;
+my $use_ssl = 1;
 
 # Verbose debugging messages    #
-my $debug = 1;
+my $debug = 0;
 
 #Playback recorded speech       #
 my $replay_rec = 0;
@@ -273,6 +274,7 @@ if ($uaresponse->decoded_content =~ /^text=(.*?)&confidence=(.*?)&result=(.*?)$/
 	warn "$name Error reading audio file\n" if ($response{status});
 	$response{confidence} = "$2";
 	$response{utterance}  = uri_unescape($1);
+	$response{utterance}  = encode('utf8', $response{utterance});
 	$response{utterance}  =~ s/\+/ /g;
 }
 
