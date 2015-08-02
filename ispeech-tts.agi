@@ -179,6 +179,7 @@ foreach my $line (@text) {
 			warn "$name File already in cache.\n" if ($debug);
 			my $res = playback("$cachedir/$filename", $intkey);
 			last if ($res > 0);
+			die if ($res < 0);
 			next;
 		}
 	}
@@ -207,6 +208,7 @@ foreach my $line (@text) {
 	my $res = playback("$cachedir/$filename", $intkey);
 	unlink "$cachedir/$filename.$format" if (!$usecache);
 	last if ($res > 0);
+	die if ($res < 0);
 }
 exit;
 
