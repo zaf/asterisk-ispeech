@@ -130,7 +130,7 @@ if (length($AGI{arg_4})) {
 }
 
 # Check cache path size: dir length + md5 + file extension #
-if ($usecache && ((length($cachedir) + 32 + 6) > $maxlen)) {
+if ($usecache && ((length($cachedir) + 32 + 6) < $maxlen)) {
 	mkpath("$cachedir") unless (-d "$cachedir");
 } else {
 	warn "$name Cache path size exceeds limit. Disabling cache.\n";
