@@ -260,7 +260,7 @@ $url .= "&content-type=$filetype&audio=$audio";
 $url .= "&speexmode=1" if ($use_speex);
 
 # Send adio data for analysis #
-$uaresponse = $ua->post("$url");
+$uaresponse = $ua->get("$url");
 
 warn "$name The response was: ", $uaresponse->decoded_content if ($debug);
 die "$name Unable to get speech data.\n" if (!$uaresponse->is_success);
