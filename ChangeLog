@@ -1,11 +1,11 @@
-2012-11-04 Lefteris Zafiris <zaf.000@gmail.com> - 0.1
+2012-11-04 Lefteris Zafiris <zaf@fastmail.com> - 0.1
 	Initial release 0.1, Working cache mechanish,
 	Speed and language selection from the dialplan
 	for the TTS module.
 
-2013-02-03 Lefteris Zafiris <zaf.000@gmail.com> - 0.2
+2013-02-03 Lefteris Zafiris <zaf@fastmail.com> - 0.2
 	Proper error handling. HTTPS support. Model and
 	freeform support for ASR module.
 
-2013-05-21 Lefteris Zafiris <zaf.000@gmail.com> - 0.3
+2013-05-21 Lefteris Zafiris <zaf@fastmail.com> - 0.3
 	Re-licensed under GPL v2. First public release.
